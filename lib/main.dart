@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,121 +8,90 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.pink,
-      ),
-      home: MyHomePage(title: 'Grid List'),
+    return const MaterialApp(
+      title: 'NFT App',
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-  final Image _cardImage = Image.asset('assets/dog.jpg');
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
-      ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        children: List.generate(100, (index) {
-          return InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DetailRoute(
-                    heroTag: 'banner${index}',
-                    heroImage: _cardImage,
-                  ),
-                ),
-              );
-            },
-            child: Card(
-              clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: [
-                  SizedBox(
-                    child: Stack(
-                      children: [
-                        Hero(
-                          tag: 'banner${index}',
-                          child: _cardImage,
-                        ),
-                        Positioned(
-                          top: 10.0,
-                          left: 10.0,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Item ${index}',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Text('Test'),
-                      ],
-                    ),
-                  ),
-                ],
+        backgroundColor: brandDarkBlue,
+        centerTitle: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(24.0),
+            bottomRight: Radius.circular(24.0),
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.menu),
+        ),
+        title: const Text(
+          'Home',
+          style: TextStyle(
+            fontSize: 14.0,
+          ),
+        ),
+        titleSpacing: 0.0,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.account_circle),
+          ),
+        ],
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(32.0),
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 18.0),
+            child: Text(
+              'World\'s most perfect NFT\'s',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
               ),
             ),
-          );
-        }),
-      ),
-    );
-  }
-}
-
-class DetailRoute extends StatelessWidget {
-  const DetailRoute({Key? key, required this.heroTag, required this.heroImage}) : super(key: key);
-
-  final String heroTag;
-  final Image heroImage;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Detail'),
-      ),
-      body: Column(
-        children: [
-          Hero(
-            tag: heroTag,
-            child: heroImage,
           ),
-          Text(heroTag),
-        ],
+        ),
+      ),
+      body: Center(
+        child: Text('Body'),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          padding: EdgeInsets.fromLTRB(0.0, 4.0, 0.0, 4.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.home),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.favorite_outline),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.book),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.perm_identity),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
